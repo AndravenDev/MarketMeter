@@ -17,7 +17,7 @@ export default function CoinPicker({ coins, current }: { coins: Coin[]; current?
   }
 
   return (
-    <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '1.5rem' }}>
+    <div style={{ display: 'flex', gap: '0.6rem', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '1.75rem' }}>
       {coins.map((coin) => {
         const active = coin.id === current
         return (
@@ -28,18 +28,20 @@ export default function CoinPicker({ coins, current }: { coins: Coin[]; current?
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '0.25rem',
-              padding: '0.5rem 0.75rem',
-              borderRadius: 8,
-              border: `1px solid ${active ? '#f7931a' : '#444'}`,
-              background: active ? 'rgba(247,147,26,0.15)' : 'transparent',
+              gap: '0.3rem',
+              padding: '0.6rem 0.85rem',
+              borderRadius: 10,
+              border: `1.5px solid ${active ? '#f59e0b' : '#e8e3db'}`,
+              background: active ? '#fffbeb' : '#ffffff',
               cursor: 'pointer',
-              minWidth: 64,
+              minWidth: 68,
               flexShrink: 0,
+              boxShadow: active ? '0 0 0 3px rgba(245,158,11,0.15)' : '0 1px 3px rgba(0,0,0,0.06)',
+              transition: 'border-color 0.15s, box-shadow 0.15s',
             }}
           >
             <img src={coin.image} alt={coin.name} width={28} height={28} />
-            <span style={{ fontSize: '0.7rem', fontWeight: 600, textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '0.68rem', fontWeight: 700, textTransform: 'uppercase', color: active ? '#d97706' : '#78716c', letterSpacing: '0.03em' }}>
               {coin.symbol}
             </span>
           </button>

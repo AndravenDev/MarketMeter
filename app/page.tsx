@@ -1,5 +1,6 @@
 import CoinPicker, { Coin } from "./CoinPicker";
 import CoinSearch from "./CoinSearch";
+import NewsFeed from "./NewsFeed";
 
 export default async function Home() {
   const res = await fetch(
@@ -8,10 +9,19 @@ export default async function Home() {
   const coins: Coin[] = await res.json();
 
   return (
-    <main style={{ margin: "0 auto", padding: "2rem" }}>
-      <h1 style={{ marginBottom: "1.5rem" }}>MarketMeter</h1>
+    <main>
+      <div style={{ marginBottom: "2rem" }}>
+        <h1 style={{ fontSize: "1.8rem", fontWeight: 700, color: "#292524", margin: "0 0 0.25rem" }}>
+          MarketMeter
+        </h1>
+        <p style={{ margin: 0, color: "#78716c", fontSize: "0.95rem" }}>
+          Track prices and news for top cryptocurrencies
+        </p>
+      </div>
+
       <CoinSearch />
       <CoinPicker coins={coins} />
+      <NewsFeed />
     </main>
   );
 }

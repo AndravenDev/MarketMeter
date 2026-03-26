@@ -74,8 +74,8 @@ export default function PriceChart({ labels, prices, range }: PriceChartProps) {
         valueYField: 'price',
         categoryXField: 'label',
         tooltip,
-        fill: am5.color(0xf7931a),
-        stroke: am5.color(0xf7931a),
+        fill: am5.color(0xf59e0b),
+        stroke: am5.color(0xf59e0b),
       })
     )
 

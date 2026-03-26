@@ -54,7 +54,7 @@ export default function CoinSearch() {
   }
 
   return (
-    <div ref={containerRef} style={{ position: 'relative', marginBottom: '1.5rem', maxWidth: 320 }}>
+    <div ref={containerRef} style={{ position: 'relative', marginBottom: '1.25rem', maxWidth: 360 }}>
       <input
         type="text"
         value={query}
@@ -62,17 +62,19 @@ export default function CoinSearch() {
         placeholder="Search coins..."
         style={{
           width: '100%',
-          padding: '0.5rem 0.75rem',
-          borderRadius: 8,
-          border: '1px solid #444',
-          background: '#111',
-          color: '#fff',
+          padding: '0.6rem 1rem',
+          borderRadius: 10,
+          border: '1.5px solid #e8e3db',
+          background: '#ffffff',
+          color: '#292524',
           fontSize: '0.95rem',
           boxSizing: 'border-box',
+          outline: 'none',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
         }}
       />
       {loading && (
-        <span style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', fontSize: '0.75rem', color: '#888' }}>
+        <span style={{ position: 'absolute', right: '0.85rem', top: '50%', transform: 'translateY(-50%)', fontSize: '0.75rem', color: '#a8a29e' }}>
           ...
         </span>
       )}
@@ -80,17 +82,17 @@ export default function CoinSearch() {
         <ul
           style={{
             position: 'absolute',
-            top: 'calc(100% + 4px)',
+            top: 'calc(100% + 6px)',
             left: 0,
             right: 0,
-            background: '#1a1a1a',
-            border: '1px solid #444',
-            borderRadius: 8,
+            background: '#ffffff',
+            border: '1.5px solid #e8e3db',
+            borderRadius: 10,
             margin: 0,
-            padding: '0.25rem 0',
+            padding: '0.3rem 0',
             listStyle: 'none',
             zIndex: 100,
-            boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
           }}
         >
           {results.map((coin) => (
@@ -102,20 +104,20 @@ export default function CoinSearch() {
                   alignItems: 'center',
                   gap: '0.6rem',
                   width: '100%',
-                  padding: '0.5rem 0.75rem',
+                  padding: '0.55rem 1rem',
                   background: 'transparent',
                   border: 'none',
-                  color: '#fff',
+                  color: '#292524',
                   cursor: 'pointer',
                   textAlign: 'left',
                   fontSize: '0.9rem',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = '#2a2a2a')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#faf8f5')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
               >
-                <img src={coin.image} alt={coin.name} width={20} height={20} />
-                <span>{coin.name}</span>
-                <span style={{ marginLeft: 'auto', color: '#888', fontSize: '0.8rem', textTransform: 'uppercase' }}>
+                <img src={coin.image} alt={coin.name} width={22} height={22} />
+                <span style={{ fontWeight: 500 }}>{coin.name}</span>
+                <span style={{ marginLeft: 'auto', color: '#a8a29e', fontSize: '0.78rem', textTransform: 'uppercase', fontWeight: 600 }}>
                   {coin.symbol}
                 </span>
               </button>

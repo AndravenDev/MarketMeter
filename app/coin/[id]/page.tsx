@@ -41,17 +41,56 @@ export default async function CoinPage({
   const prices = chartData.prices.map(([, price]) => price);
 
   return (
-    <main style={{ margin: "0 auto", padding: "2rem" }}>
-      <a href="/" style={{ fontSize: "0.9rem", color: "#f7931a", textDecoration: "none", display: "inline-block", marginBottom: "1.5rem" }}>
+    <main>
+      <a
+        href="/"
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "0.3rem",
+          fontSize: "0.88rem",
+          color: "#78716c",
+          textDecoration: "none",
+          marginBottom: "1.75rem",
+          padding: "0.3rem 0.75rem",
+          borderRadius: 20,
+          background: "#f0ebe4",
+          border: "1px solid #e8e3db",
+        }}
+      >
         ← Back
       </a>
-      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.25rem" }}>
-        <img src={coin.image} alt={coin.name} width={36} height={36} />
-        <h2 style={{ margin: 0 }}>{coin.name}</h2>
-        <span style={{ color: "#888", textTransform: "uppercase", fontSize: "0.9rem" }}>{coin.symbol}</span>
+
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "0.75rem",
+        marginBottom: "1.5rem",
+        padding: "1rem 1.25rem",
+        background: "#ffffff",
+        borderRadius: 12,
+        border: "1px solid #e8e3db",
+        boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
+      }}>
+        <img src={coin.image} alt={coin.name} width={40} height={40} />
+        <div>
+          <h2 style={{ margin: 0, fontSize: "1.2rem", fontWeight: 700, color: "#292524" }}>{coin.name}</h2>
+          <span style={{ color: "#a8a29e", textTransform: "uppercase", fontSize: "0.82rem", fontWeight: 600 }}>
+            {coin.symbol}
+          </span>
+        </div>
       </div>
-      <RangePicker current={range} />
-      <PriceChart labels={labels} prices={prices} range={range} />
+
+      <div style={{
+        background: "#ffffff",
+        borderRadius: 12,
+        border: "1px solid #e8e3db",
+        boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
+        padding: "1.25rem",
+      }}>
+        <RangePicker current={range} />
+        <PriceChart labels={labels} prices={prices} range={range} />
+      </div>
     </main>
   );
 }

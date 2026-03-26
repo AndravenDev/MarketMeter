@@ -20,19 +20,22 @@ export default function RangePicker({ current }: { current: string }) {
   }
 
   return (
-    <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+    <div style={{ display: 'flex', gap: '0.4rem', marginBottom: '1.25rem' }}>
       {RANGES.map(({ label, value }) => (
         <button
           key={value}
           onClick={() => select(value)}
           style={{
-            padding: '0.4rem 1rem',
-            borderRadius: 6,
-            border: '1px solid #f7931a',
-            background: current === value ? '#f7931a' : 'transparent',
-            color: current === value ? '#fff' : '#f7931a',
+            padding: '0.35rem 0.9rem',
+            borderRadius: 20,
+            border: '1.5px solid',
+            borderColor: current === value ? '#f59e0b' : '#e8e3db',
+            background: current === value ? '#fffbeb' : 'transparent',
+            color: current === value ? '#d97706' : '#78716c',
             cursor: 'pointer',
             fontWeight: 600,
+            fontSize: '0.82rem',
+            transition: 'all 0.15s',
           }}
         >
           {label}
