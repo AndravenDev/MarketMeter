@@ -1,6 +1,7 @@
 import PriceChart from "./PriceChart";
 import RangePicker from "./RangePicker";
 import CoinPicker, { Coin } from "./CoinPicker";
+import CoinSearch from "./CoinSearch";
 
 const RANGE_CONFIG = {
   day:   { days: 1,   dateFormat: { hour: '2-digit', minute: '2-digit' } },
@@ -41,6 +42,7 @@ export default async function Home({
 
   return (
     <main style={{ margin: "0 auto", padding: "2rem" }}>
+      <CoinSearch />
       <CoinPicker coins={coins} current={selectedCoin.id} />
       <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
         <img src={selectedCoin.image} alt={selectedCoin.name} width={32} height={32} />
