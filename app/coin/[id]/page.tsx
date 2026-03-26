@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import PriceChart from "../../PriceChart";
 import RangePicker from "../../RangePicker";
 

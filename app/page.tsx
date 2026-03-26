@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import CoinPicker, { Coin } from "./CoinPicker";
 import NewsFeed from "./NewsFeed";
 
