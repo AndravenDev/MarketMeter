@@ -12,7 +12,7 @@ interface NewsItem {
 
 export default async function NewsFeed() {
   const res = await fetch(
-    `https://newsdata.io/api/1/latest?apikey=${process.env.NEWSDATA_API_KEY}&q=crypto&language=en`,
+    `https://newsdata.io/api/1/news?apikey=${process.env.NEWSDATA_API_KEY}&q=crypto&language=en`,
     { next: { revalidate: 300 } },
   )
 
