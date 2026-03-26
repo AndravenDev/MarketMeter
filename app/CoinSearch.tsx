@@ -1,12 +1,11 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Coin } from './CoinPicker'
 
 export default function CoinSearch() {
   const router = useRouter()
-  const searchParams = useSearchParams()
 
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<Coin[]>([])
@@ -49,9 +48,7 @@ export default function CoinSearch() {
   }, [])
 
   function select(coin: Coin) {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('coin', coin.id)
-    router.push('?' + params.toString())
+    router.push('/coin/' + coin.id)
     setQuery('')
     setOpen(false)
   }

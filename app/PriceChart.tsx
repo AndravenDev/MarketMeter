@@ -18,6 +18,15 @@ interface PriceChartProps {
   range: string
 }
 
+function formatPrice(value: number): string {
+  if (value === 0) return '$0'
+  if (value >= 1) return '$' + value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+
+  const leadingZeros = Math.floor(-Math.log10(Math.abs(value)))
+  const decimals = leadingZeros + 4
+  return '$' + value.toFixed(decimals)
+}
+
 export default function PriceChart({ labels, prices, range }: PriceChartProps) {
   const chartRef = useRef<HTMLDivElement>(null)
 
@@ -51,6 +60,12 @@ export default function PriceChart({ labels, prices, range }: PriceChartProps) {
       })
     )
 
+    const tooltip = am5.Tooltip.new(root, {})
+    tooltip.label.adapters.add('text', (_text, target) => {
+      const value = (target.dataItem as am5.DataItem<am5xy.ILineSeriesDataItem> | undefined)?.get('valueY')
+      return value != null ? formatPrice(value) : ''
+    })
+
     const series = chart.series.push(
       am5xy.SmoothedXLineSeries.new(root, {
         name: 'Bitcoin Price (USD)',
@@ -58,9 +73,7 @@ export default function PriceChart({ labels, prices, range }: PriceChartProps) {
         yAxis,
         valueYField: 'price',
         categoryXField: 'label',
-        tooltip: am5.Tooltip.new(root, {
-          labelText: '${valueY.formatNumber("#,###.00")}',
-        }),
+        tooltip,
         fill: am5.color(0xf7931a),
         stroke: am5.color(0xf7931a),
       })

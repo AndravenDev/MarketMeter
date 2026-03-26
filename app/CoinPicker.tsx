@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export interface Coin {
   id: string
@@ -9,14 +9,11 @@ export interface Coin {
   image: string
 }
 
-export default function CoinPicker({ coins, current }: { coins: Coin[]; current: string }) {
+export default function CoinPicker({ coins, current }: { coins: Coin[]; current?: string }) {
   const router = useRouter()
-  const searchParams = useSearchParams()
 
   function select(id: string) {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('coin', id)
-    router.push('?' + params.toString())
+    router.push('/coin/' + id)
   }
 
   return (
