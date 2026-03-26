@@ -54,7 +54,7 @@ export default function CoinSearch() {
   }
 
   return (
-    <div ref={containerRef} style={{ position: 'relative', marginBottom: '1.25rem', maxWidth: 360 }}>
+    <div ref={containerRef} style={{ position: 'relative', maxWidth: 300 }}>
       <input
         type="text"
         value={query}
