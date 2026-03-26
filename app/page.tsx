@@ -19,19 +19,26 @@ export default async function Home({
   const range: Range = rawRange in RANGE_CONFIG ? (rawRange as Range) : 'day';
   const { days, dateFormat } = RANGE_CONFIG[range];
 
-  const res = await fetch(
-    `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${days}&x_cg_demo_api_key=${process.env.COINGECKO_API_KEY}`,
-  );
+  const apiKey = process.env.COINGECKO_API_KEY;
 
-  const data = await res.json();
+  const [chartRes, coinRes] = await Promise.all([
+    fetch(`https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${days}&x_cg_demo_api_key=${apiKey}`),
+    fetch(`https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&community_data=false&developer_data=false&x_cg_demo_api_key=${apiKey}`),
+  ]);
 
-  const labels = data.prices.map(([timestamp]: [number, number]) =>
+  const [chartData, coinData] = await Promise.all([chartRes.json(), coinRes.json()]);
+
+  const labels = chartData.prices.map(([timestamp]: [number, number]) =>
     new Date(timestamp).toLocaleString("en-US", dateFormat as Intl.DateTimeFormatOptions),
   );
-  const prices = data.prices.map(([, price]: [number, number]) => price);
+  const prices = chartData.prices.map(([, price]: [number, number]) => price);
 
   return (
     <main style={{ margin: "0 auto", padding: "2rem" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
+        <img src={coinData.image.small} alt={coinData.name} width={32} height={32} />
+        <h2 style={{ margin: 0, fontSize: "1.25rem" }}>{coinData.name}</h2>
+      </div>
       <RangePicker current={range} />
       <PriceChart labels={labels} prices={prices} range={range} />
     </main>
