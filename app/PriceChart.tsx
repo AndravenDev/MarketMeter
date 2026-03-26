@@ -5,12 +5,20 @@ import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 
+const MIN_GRID_DISTANCE: Record<string, number> = {
+  day: 80,
+  week: 140,
+  month: 200,
+  year: 100,
+}
+
 interface PriceChartProps {
   labels: string[]
   prices: number[]
+  range: string
 }
 
-export default function PriceChart({ labels, prices }: PriceChartProps) {
+export default function PriceChart({ labels, prices, range }: PriceChartProps) {
   const chartRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -31,7 +39,7 @@ export default function PriceChart({ labels, prices }: PriceChartProps) {
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         categoryField: 'label',
-        renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 100 }),
+        renderer: am5xy.AxisRendererX.new(root, { minGridDistance: MIN_GRID_DISTANCE[range] ?? 100 }),
         tooltip: am5.Tooltip.new(root, {}),
       })
     )
@@ -44,7 +52,7 @@ export default function PriceChart({ labels, prices }: PriceChartProps) {
     )
 
     const series = chart.series.push(
-      am5xy.LineSeries.new(root, {
+      am5xy.SmoothedXLineSeries.new(root, {
         name: 'Bitcoin Price (USD)',
         xAxis,
         yAxis,
