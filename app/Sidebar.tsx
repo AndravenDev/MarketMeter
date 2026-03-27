@@ -2,7 +2,62 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+const CLOCKS = [
+  { label: 'New York', tz: 'America/New_York' },
+  { label: 'London',   tz: 'Europe/London' },
+  { label: 'Sofia',    tz: 'Europe/Sofia' },
+  { label: 'Tokyo',    tz: 'Asia/Tokyo' },
+]
+
+function WorldClocks({ collapsed }: { collapsed: boolean }) {
+  const [now, setNow] = useState<Date | null>(null)
+
+  useEffect(() => {
+    setNow(new Date())
+    const id = setInterval(() => setNow(new Date()), 1000)
+    return () => clearInterval(id)
+  }, [])
+
+  if (!now) return null
+
+  return (
+    <div style={{
+      padding: collapsed ? '0.75rem 0' : '0.75rem 1rem 1rem',
+      borderTop: '1px solid rgba(255,255,255,0.07)',
+    }}>
+      {CLOCKS.map(({ label, tz }) => {
+        const time = now.toLocaleTimeString('en-US', {
+          timeZone: tz,
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        })
+        return (
+          <div
+            key={tz}
+            title={collapsed ? `${label}: ${time}` : undefined}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: collapsed ? 'center' : 'space-between',
+              padding: '0.28rem 0',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {!collapsed && (
+              <span style={{ fontSize: '0.82rem', color: '#78716c' }}>{label}</span>
+            )}
+            <span style={{ fontSize: '0.82rem', fontWeight: 600, color: '#a8a29e', fontVariantNumeric: 'tabular-nums' }}>
+              {collapsed ? time.slice(0, 5) : time}
+            </span>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 const LINKS = [
   {
@@ -87,7 +142,7 @@ export default function Sidebar() {
         </button>
       </div>
 
-      <nav style={{ padding: '0.75rem 0' }}>
+      <nav style={{ padding: '0.75rem 0', flex: 1 }}>
         {LINKS.map(({ href, label, icon }) => {
           const active = href === '/'
             ? pathname === '/' || pathname.startsWith('/coin')
@@ -118,6 +173,8 @@ export default function Sidebar() {
           )
         })}
       </nav>
+
+      <WorldClocks collapsed={collapsed} />
     </aside>
   )
 }

@@ -106,7 +106,11 @@ export default async function CoinPage({
   const changeSign  = coin.price_change_percentage_24h >= 0 ? '+' : ''
 
   return (
-    <main>
+    <main style={{
+      minHeight: 'calc(100vh - 56px)',
+      background: 'linear-gradient(160deg, #faf8f5 0%, #f0ebe4 60%, #e8f4f0 100%)',
+      padding: '2rem',
+    }}>
       <a
         href="/"
         style={{
