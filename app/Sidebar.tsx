@@ -175,6 +175,43 @@ export default function Sidebar() {
       </nav>
 
       <WorldClocks collapsed={collapsed} />
+
+      <div style={{
+        padding: collapsed ? '0.75rem 0' : '0.75rem 1rem',
+        borderTop: '1px solid rgba(255,255,255,0.07)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: collapsed ? 'center' : 'flex-start',
+        gap: '0.4rem',
+      }}>
+        <a
+          href="https://www.coingecko.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Data provided by CoinGecko"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: collapsed ? 'center' : 'flex-start',
+            gap: '0.15rem',
+            textDecoration: 'none',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {collapsed ? (
+            <span style={{ fontSize: '1.1rem' }}>🦎</span>
+          ) : (
+            <>
+              <span style={{ fontSize: '0.65rem', color: '#78716c', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>
+                Powered by
+              </span>
+              <span style={{ fontSize: '0.88rem', color: '#d6d3d1', fontWeight: 700, letterSpacing: '0.01em' }}>
+                CoinGecko
+              </span>
+            </>
+          )}
+        </a>
+      </div>
     </aside>
   )
 }
